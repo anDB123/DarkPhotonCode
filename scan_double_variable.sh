@@ -1,8 +1,6 @@
 #Code to scan 
-export MAIN_DIRECTORY="/home/andrew/abrown/" #CHANGE THIS TO tgething if I forgot!!!!
+export MAIN_DIRECTORY="/home/andrew/abrown/" 
 cd $MAIN_DIRECTORY
-
-source $MAIN_DIRECTORY/$SCRIPTS_DIR/scan_variable_function.sh #<--------------- Most of the operation code is in here
 
 #independent variable stuff
 export independent_var1="MIXING_PARAMETER" 
