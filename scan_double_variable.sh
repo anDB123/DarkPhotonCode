@@ -4,23 +4,23 @@ source /cvmfs/sft.cern.ch/lcg/releases/LCG_98python3/Python/3.7.6/x86_64-centos7
 cd /higgs-data1/abrown/
 #Variable Declaration
 
-export independent_variable1="$independent1_var"
-export independent_variable1_label="$independent1_label"
-export independent_variable1_unit="$independent1_unit"
+export independent_variable1="DARK_PHOTON_MASS"
+export independent_variable1_label="DarkPhotonMass"
+export independent_variable1_unit="MeV"
 
-export independent_variable2="$independent2_var"
-export independent_variable2_label="$independent2_label"
-export independent_variable2_unit="$independent2_unit"
+export independent_variable2="ETA"
+export independent_variable2_label="KineticMixingParameter"
+export independent_variable2_unit="(noUnits)"
 
 export scan_name="${independent_variable1}against${independent_variable2}_scan"
 export process_name="$process_name"
 #for BSM only use /aSz
 #for SM only use /zp
-export EVENT_PROCESSES="$event_process1" #S is for space (removed later)
-export EXTRA_EVENT_PROCESSES="$event_process2" #leave this blank for other processes
+export EVENT_PROCESSES="mu+Smu+S>Smu+Smu+/a" #S is for space (removed later)
+export EXTRA_EVENT_PROCESSES="mu-Smu-S>Smu-Smu-/a" #leave this blank for other processes
 
-SCAN_ARRAY1="$scan_array1"
-SCAN_ARRAY2="$scan_array2"
+SCAN_ARRAY1=(5 10 15 20 30)
+SCAN_ARRAY2=(0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9)
 
 #Plot Parameters
 export PLOT_TITLE="$title_prefix$independent_variable1_label/vs/$independent_variable2_label/vs/Cross/Section"
@@ -68,7 +68,8 @@ do
 	#file to run create_event_files.sh for many runs with different variables
 	echo "Doing run for a ${independent_variable2} of ${!independent_variable2}";
 
-	export SPECIFIC_FILE_STRUCTURE="./${process_name}/${scan_name}/m${DARK_PHOTON_MASS}_e${ETA}_ptc${PT_CUTOFF}_etc${ETA_CUTOFF}/" #used as basis for placing everything
+	export SPECIFIC_FILE_STRUCTURE="./${process_nam
+	e}/${scan_name}/m${DARK_PHOTON_MASS}_e${ETA}_ptc${PT_CUTOFF}_etc${ETA_CUTOFF}/" #used as basis for placing everything
 	export RUNFILE_OUTPUT="${SPECIFIC_FILE_STRUCTURE}runfile.run" 
 	export MADGRAPH_RUN_OUTPUT="${madgraph_runs_file}/${SPECIFIC_FILE_STRUCTURE}"
 	mkdir -p ${SPECIFIC_FILE_STRUCTURE}
@@ -133,3 +134,4 @@ for i in ${scan_params_array[@]}
 do
 echo "$i,${!i}" >> ${SCAN_DIR}/scan_params.csv
 done
+
